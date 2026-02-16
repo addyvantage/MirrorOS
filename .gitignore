@@ -23,6 +23,11 @@ pnpm-debug.log*
 # Environment
 .env
 .env.*
+!.env.example
+!**/.env.example
+
+# Monorepo explicit env ignores
+apps/web/.env.local
 
 # Data
 data/raw/
@@ -40,3 +45,9 @@ logs/
 .DS_Store
 .vscode/
 .idea/
+
+# Monorepo explicit ignores
+apps/web/node_modules/
+apps/web/.next/
+apps/api/.venv/
+apps/api/data/processed/

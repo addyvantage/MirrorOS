@@ -17,4 +17,4 @@ package = false
 
 [tool.alembic]
 script_location = "app/migrations"
-prepend_sys_path = "."
+prepend_sys_path = ".:../.."

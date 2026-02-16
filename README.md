@@ -48,3 +48,11 @@ TODO
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Web Environment Setup
+
+Copy the example env file before starting the web app:
+
+```bash
+cp apps/web/.env.example apps/web/.env.local
+```
