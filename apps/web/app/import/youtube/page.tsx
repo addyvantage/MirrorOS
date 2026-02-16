@@ -68,7 +68,26 @@ export default function YouTubeImportPage() {
                 <p>Connector: {result.connector_id}</p>
                 <p>Run ID: {result.ingestion_run_id}</p>
                 <p>Ingested events: {result.ingested_events}</p>
-                <p>Notes: {result.notes}</p>
+                {result.warnings.length ? (
+                  <div className="mt-3">
+                    <p className="font-semibold">Warnings</p>
+                    <ul className="mt-1 list-disc pl-5">
+                      {result.warnings.map((warning) => (
+                        <li key={warning}>{warning}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                {result.errors.length ? (
+                  <div className="mt-3">
+                    <p className="font-semibold">Errors</p>
+                    <ul className="mt-1 list-disc pl-5">
+                      {result.errors.map((errorItem) => (
+                        <li key={errorItem}>{errorItem}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </div>
             ) : null}
 

@@ -5,7 +5,9 @@ export type IngestResponse = {
   connector_id: string;
   ingestion_run_id: string;
   ingested_events: number;
-  notes: string;
+  warnings: string[];
+  errors: string[];
+  notes?: string;
 };
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
