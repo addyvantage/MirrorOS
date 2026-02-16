@@ -10,6 +10,25 @@ export type IngestResponse = {
   notes?: string;
 };
 
+export type RecommendationReceipt = {
+  event_id: string;
+  title: string;
+  timestamp: string;
+  connector_id: string;
+};
+
+export type RecentRecommendation = {
+  title: string;
+  creator: string;
+  url: string;
+  score: number;
+  receipts: RecommendationReceipt[];
+};
+
+export type RecentRecommendationsResponse = {
+  recommendations: RecentRecommendation[];
+};
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
 function normalizedApiBaseUrl(): string {
@@ -78,4 +97,26 @@ export function ingestYoutube(path: string, signal?: AbortSignal): Promise<Inges
 
 export function ingestTwitter(path: string, signal?: AbortSignal): Promise<IngestResponse> {
   return ingest("twitter", path, signal);
+}
+
+export async function getRecentRecommendations(
+  signal?: AbortSignal
+): Promise<RecentRecommendationsResponse> {
+  const baseUrl = normalizedApiBaseUrl();
+  if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not configured");
+  }
+
+  const response = await fetch(`${baseUrl}/recommend/recent`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    cache: "no-store",
+    signal
+  });
+
+  if (!response.ok) {
+    throw new Error(`Recommendation request failed (${response.status})`);
+  }
+
+  return (await response.json()) as RecentRecommendationsResponse;
 }

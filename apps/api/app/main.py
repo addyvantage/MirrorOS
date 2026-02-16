@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from app.config import get_settings
 from app.db.session import SessionLocal
 from app.logging import configure_logging
-from app.repositories import bulk_insert_events
+from app.repositories import bulk_insert_events, get_recent_recommendations
 from packages.connectors import YouTubeTakeoutConnector
 
 settings = get_settings()
@@ -68,3 +68,10 @@ def ingest_twitter(_: IngestRequest) -> dict[str, str | int | bool | list[str]]:
         "warnings": [],
         "errors": [],
     }
+
+
+@app.get("/recommend/recent")
+def recommend_recent() -> dict[str, list[dict[str, object]]]:
+    with SessionLocal() as session:
+        recommendations = get_recent_recommendations(session)
+    return {"recommendations": recommendations}
