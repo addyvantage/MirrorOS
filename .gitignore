@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.next/
+
+# Environment
+.env
+.env.*
+
+# Data
+data/raw/
+data/processed/
+
+# Databases
+*.db
+*.sqlite
+
+# Logs
+logs/
+*.log
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
